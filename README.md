@@ -10,7 +10,9 @@
     python manage.py migrate
     
 # Start the Server
+We so this using the manage.py command tool by entering this command in the terminal:
 
     python manage.py runserver
-    
+If you're doing this on another platform, then you might need to use this instead (change the port number from 8000 as required):
+
     python3 manage.py runserver 0.0.0.0:8000 
