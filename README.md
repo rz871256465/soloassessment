@@ -8,11 +8,11 @@
 
 We now need to configure the database, which you saw was already detailed in the settings.py file. As django has a built-in admin tool, it already knows some of the tables that it needs to use. We can set this up with the command:
 
-pycharm:
+codio:
 
     python3 manage.py migrate
     
-codio:
+pycharm :
 
     python manage.py migrate
     
