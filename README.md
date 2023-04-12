@@ -30,3 +30,13 @@ If you're doing this on another platform, then you might need to use this instea
 codio:
 
     python3 manage.py runserver 0.0.0.0:8000 
+    
+ First, we ask Django to generate the migration file with the command:
+ 
+    python manage.py makemigrations shopping
+    
+This will read the models.py file and generate a migration file based on changes found there.
+
+Second, we run the generated migration with the command:
+ 
+    python manage.py migrate shopping   
