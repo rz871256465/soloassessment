@@ -3,7 +3,7 @@ import os
 from pathlib import Path
 from django.db import models
 from django.core.management.base import BaseCommand, CommandError
-from shopping.models import shopping_index
+from shopping.models import shopping_index,Shopping_detail
 
 class Command(BaseCommand):
     help = 'Load data from csv'
@@ -12,6 +12,7 @@ class Command(BaseCommand):
 
         # drop the data from the table so that if we rerun the file, we don't repeat values
         shopping_index.objects.all().delete()
+        Shopping_detail.objects.all().delete()
         print("table dropped successfully")
         # create table again
 
@@ -36,3 +37,28 @@ class Command(BaseCommand):
 
             # else:
             # next(reader)
+
+            with open(str(base_dir) + '/shopping/database/amazon_co-ecommerce_sample.csv', newline='') as f:
+                reader = csv.reader(f, delimiter=",")
+                next(reader)  # skip the header line
+                for row in reader:
+                    print(row)
+                    if row[3] is not '':
+                        shop = shopping_index.objects.filter(product_name=row[3]).first()
+                        shopping_detail = Shopping_detail.objects.create(
+                            id=int(row[0]),
+                            product_name=shop,
+                            date=row[1],
+                            uniq_id=row[2],
+                            manufacturer=row[4],
+                            price=float(row[5]),
+                            average_review_rating = row[6],
+                            city=row[7],
+                            country=row[8],
+                            latitude=row[9],
+                            longitude=row[10],
+                        )
+                        # Save the shopping_detail object to the database
+                        shopping_detail.save()
+                    else:
+                        next(reader)
