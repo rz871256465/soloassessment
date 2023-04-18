@@ -1,4 +1,4 @@
-# soloassisment
+# soloassesment
 
     pyenv local 3.7.0 # this sets the local version of python to 3.7.0
     python3 -m venv .venv # this creates the virtual environment for you
@@ -31,6 +31,8 @@ codio:
 
     python3 manage.py runserver 0.0.0.0:8000 
     
+   
+    
  First, we ask Django to generate the migration file with the command:
  
     python manage.py makemigrations shopping
@@ -40,3 +42,7 @@ This will read the models.py file and generate a migration file based on changes
 Second, we run the generated migration with the command:
  
     python manage.py migrate shopping   
+    
+With this we can drop the data from the table, and then load it in, as required. We don't use any libraries for this as we want to pull specific fields from the file. Run the file with the command:
+
+    python3 manage.py parse_csv
