@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+     integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="crossorigin=""></script>
+    <style>
+    #mapid { height: 350px; }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <title>Country List</title>
+    <style>
+    </style>
+    <title>Country List</title>
+</head>
+<body>
+
+    <div class="table-container">
+    <div>
+    <div id="mapid"></div>
+ <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from
+  <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+<script type="text/javascript">
+
+    var mymap = L.map('mapid').setView([{{ produces_lat}}, {{produces_lng}}], 6 );
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png?access_token={accessToken}', {
+      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+      maxZoom: 18,
+      accessToken: 'no-token'
+    }).addTo(mymap);
+    var taggingIcon = L.icon({
+      iconUrl: "{% static 'images/placeholder.png' %}",
+      iconSize: [35, 35]
+    });
+    var marker = L.marker([{{ produces_lat }}, {{produces_lng }}], {icon: taggingIcon }).addTo(mymap);
+</script>
+    <div>
+        {{ plot_div|safe }}
+    </div>
+    <table>
+  <thead>
+    <tr>
+        <th>id</th>
+        <th>date</th>
+        <th>uniq_id</th>
+        <th>product_name</th>
+        <th>manufacturer</th>
+        <th>price</th>
+        <th>average_review_rating</th>
+        <th>city</th>
+        <th>country</th>
+        <th>latitude</th>
+        <th>longitude</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for row in produce_noorder %}
+      <tr>
+            <td>{{ row.id }}</td>
+            <td>{{ row.date }}</td>
+            <td>{{ row.uniq_id }}</td>
+            <td>{{ row.product_name }}</td>
+            <td>{{ row.manufacturer }}</td>
+            <td>{{ row.price }}</td>
+            <td>{{ row.average_review_rating }}</td>
+            <td>{{ row.city }}</td>
+            <td>{{ row.country }}</td>
+            <td>{{ row.latitude }}</td>
+            <td>{{ row.longitude }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+  </table>
+    </div>
+        </div>
+</body>
+</html>
