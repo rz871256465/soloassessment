@@ -46,11 +46,11 @@ def product_by_name(request, value):
 def check_by_date(request, date):
     datesnoorder = Shopping_detail.objects.filter(date=date)
     dates = datesnoorder.order_by('price')
-    x_data = [product.product_name for product in dates]
+    x_data = [product.uniq_id for product in dates]
     y_data = [float(date.price) for date in dates]
     trace = go.Scatter(x=x_data, y=y_data, mode='markers')
     data = [trace]
-    layout = go.Layout(title='Shopping Detail on ' + str(date), xaxis=dict(title='product_name'), yaxis=dict(title='price'))
+    layout = go.Layout(title='Shopping Detail on ' + str(date), xaxis=dict(title='uniq_id'), yaxis=dict(title='price'))
     fig = go.Figure(data=data, layout=layout)
     div = fig.to_html(full_html=False)
     context = {
@@ -58,6 +58,7 @@ def check_by_date(request, date):
         'plot_div': div,
     }
     return render(request, 'shopping/check_by_date.html', context)
+
 
 
 
