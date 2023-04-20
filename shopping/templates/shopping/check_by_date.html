@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <title>Country List</title>
+    <style>
+
+    </style>
+    <title>Country List</title>
+</head>
+<body>
+    <div class="table-container">
+    <div>
+    {% if plot_div %}
+    {{ plot_div|safe }}
+    {% endif %}
+    <table>
+  <thead>
+    <tr>
+        <th>id</th>
+        <th>date</th>
+        <th>uniq_id</th>
+        <th>product_name</th>
+        <th>manufacturer</th>
+        <th>price</th>
+        <th>average_review_rating</th>
+        <th>city</th>
+        <th>country</th>
+        <th>latitude</th>
+        <th>longitude</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for row in dates %}
+      <tr>
+            <td>{{ row.id }}</td>
+            <td>{{ row.date }}</td>
+            <td>{{ row.uniq_id }}</td>
+            <td>{{ row.product_name }}</td>
+            <td>{{ row.manufacturer }}</td>
+            <td>{{ row.price }}</td>
+            <td>{{ row.average_review_rating }}</td>
+            <td>{{ row.city }}</td>
+            <td>{{ row.country }}</td>
+            <td>{{ row.latitude }}</td>
+            <td>{{ row.longitude }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+  </table>
+    </div>
+        </div>
+</body>
+</html>

@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .models import shopping_index, Shopping_detail
 import plotly.graph_objs as go
 from plotly.offline import plot
+
 # Create your views here.
 
 def shoppingindex(request):
@@ -37,6 +38,29 @@ def product_by_name(request, value):
         'produces_lat': produces_lat,
         'produces_lng': produces_lng,
         'plot_div': div,
-        'produce_noorder':produce_noorder,
+        'produce_noorder': produce_noorder,
     }
     return render(request, 'shopping/product_by_name.html', context)
+
+
+def check_by_date(request, date):
+    datesnoorder = Shopping_detail.objects.filter(date=date)
+    dates = datesnoorder.order_by('price')
+    x_data = [product.product_name for product in dates]
+    y_data = [float(date.price) for date in dates]
+    trace = go.Scatter(x=x_data, y=y_data, mode='markers')
+    data = [trace]
+    layout = go.Layout(title='Shopping Detail on ' + str(date), xaxis=dict(title='product_name'), yaxis=dict(title='price'))
+    fig = go.Figure(data=data, layout=layout)
+    div = fig.to_html(full_html=False)
+    context = {
+        'dates': dates,
+        'plot_div': div,
+    }
+    return render(request, 'shopping/check_by_date.html', context)
+
+
+
+
+
+
