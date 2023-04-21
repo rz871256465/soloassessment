@@ -4,6 +4,8 @@ import plotly.graph_objs as go
 from plotly.offline import plot
 
 # Create your views here.
+def index(request):
+    return render(request, 'shopping/index.html')
 
 def shoppingindex(request):
     shopping_items = shopping_index.objects.all()
