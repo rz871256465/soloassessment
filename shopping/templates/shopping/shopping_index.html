@@ -74,8 +74,8 @@
       </div>
     </li>
   </ul>
-    <form action="/search" method="GET">
-      <input type="text" name="query" placeholder="Search...">
+    <form method=“GET” action="{% url 'shoppingindex' %}">
+      <input type="text" name="query" placeholder="Search..." value="{{ query }}">
       <button type="submit">Go</button>
     </form>
 </nav>

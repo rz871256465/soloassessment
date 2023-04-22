@@ -1,15 +1,20 @@
 from django.shortcuts import render
-from .models import shopping_index, Shopping_detail,Product
+from .models import shopping_index, Shopping_detail
 import plotly.graph_objs as go
 from plotly.offline import plot
-
+from django.db.models import Q
 # Create your views here.
 def index(request):
     return render(request, 'shopping/index.html')
 
 def shoppingindex(request):
-    shopping_items = shopping_index.objects.all()
-    return render(request, 'shopping/shopping_index.html', {'shopping_items':shopping_items})
+    query = request.GET.get('query', '')
+    shopping_items = shopping_index.objects.filter(
+        Q(product_name__icontains=query) |
+        Q(manufacturer__icontains=query) |
+        Q(country__icontains=query)
+    )
+    return render(request, 'shopping/shopping_index.html', {'shopping_items':shopping_items,'query':query})
 
 def shoppingdetail(request):
     shopping_details = Shopping_detail.objects.all()
@@ -61,13 +66,6 @@ def check_by_date(request, date):
     }
     return render(request, 'shopping/check_by_date.html', context)
 
-def search(request):
-    query = request.GET.get('q')
-    if query is None:
-        results = []
-    else:
-        results = Product.objects.filter(product_name__icontains=query)
-    return render(request, 'search_results.html', {'results': results})
 
 
 
