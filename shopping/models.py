@@ -27,3 +27,13 @@ class Shopping_detail(models.Model):
     longitude = models.TextField()
     def __str__(self):
             return f'{self.id}, {self.date}, {self.uniq_id}, {self.product_name},{self.manufacturer},{self.price},{self.average_review_rating},{self.city},{self.country},{self.latitude},{self.longitude}'
+
+class Product(models.Model):
+    product_name = models.CharField(max_length=255)
+    manufacturer = models.CharField(max_length=255)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    average_review_rating = models.FloatField()
+    country = models.CharField(max_length=255)
+
+    def __str__(self):
+        return f' {self.product_name}, {self.manufacturer}, {self.price}, {self.average_review_rating}, {self.country}'

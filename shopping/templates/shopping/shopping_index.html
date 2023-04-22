@@ -1,33 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Title</title>
-</head>
-<body>
-    <table>
-        <thead>
-            <tr>
-                <th>uniq_id</th>
-                <th>product_name</th>
-                <th>manufacturer</th>
-                <th>price</th>
-                <th>average_review_rating</th>
-                <th>country</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for row in shopping_items %}
-            <tr>
-                <td>{{ row.uniq_id }}</td>
-                <td><a href="/product_by_name/{{row.product_name}}" > {{ row.product_name }}</a></td>
-                <td>{{ row.manufacturer }}</td>
-                <td>{{ row.price }}</td>
-                <td>{{ row.average_review_rating }}</td>
-                <td>{{ row.country }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</body>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <style>
+      .container-wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: stretch;
+        width: 100%;
+      }
+
+      .container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        width: 80%;
+        background-color: #ccc;
+      }
+
+      .item {
+        width: 30%;
+        border: 2px solid black;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+      }
+
+      .item img {
+        max-width: 100%;
+        height: auto;
+      }
+
+      .item p {
+        margin: 5px;
+      }
+
+      .side-panel {
+        width: 20%;
+        background-color: red;
+      }
+    </style>
+  </head>
+  <body>
+
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <!-- Brand -->
+  <a class="navbar-brand" href="#">Toys</a>
+
+  <!-- Links -->
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" href="/shoppingindex">Link 1</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Link 2</a>
+    </li>
+
+    <!-- Dropdown -->
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+        Dropdown link
+      </a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="#">Link 1</a>
+        <a class="dropdown-item" href="#">Link 2</a>
+        <a class="dropdown-item" href="#">Link 3</a>
+      </div>
+    </li>
+  </ul>
+    <form action="/search" method="GET">
+      <input type="text" name="query" placeholder="Search...">
+      <button type="submit">Go</button>
+    </form>
+</nav>
+
+    <div class="container-wrapper">
+      <div class="side-panel">
+        <p>Right Panel</p>
+      </div>
+      <div class="container">
+        {% for row in shopping_items %}
+        <div class="item">
+          <img src="{{ row.image }}" alt="{{ row.product_name }}" />
+          <p><a href="/product_by_name/{{row.product_name}}" > {{ row.product_name }}</a></p>
+          <p>{{ row.manufacturer }}</p>
+          <p>{{ row.price }}</p>
+          <p>{{ row.average_review_rating }}</p>
+          <p>{{ row.country }}</p>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+  </body>
 </html>
+
