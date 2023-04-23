@@ -6,10 +6,12 @@ from django.db.models import Q
 from django.contrib.auth import login
 from .forms import RegistrationForm
 from django.contrib.auth.views import LoginView
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render
 # Create your views here.
 def index(request):
     return render(request, 'shopping/index.html')
-
+@login_required
 def shoppingindex(request):
     query = request.GET.get('query', '')
     shopping_items = shopping_index.objects.filter(
