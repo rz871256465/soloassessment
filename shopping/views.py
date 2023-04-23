@@ -1,8 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import shopping_index, Shopping_detail
 import plotly.graph_objs as go
 from plotly.offline import plot
 from django.db.models import Q
+from django.contrib.auth import login
+from .forms import RegistrationForm
+from django.contrib.auth.views import LoginView
 # Create your views here.
 def index(request):
     return render(request, 'shopping/index.html')
@@ -66,9 +69,19 @@ def check_by_date(request, date):
     }
     return render(request, 'shopping/check_by_date.html', context)
 
+def register(request):
+    if request.method == 'POST':
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('index')
+    else:
+        form = RegistrationForm()
+    return render(request, 'registration/register.html', {'form': form})
 
-
-
+class MyLoginView(LoginView):
+    template_name = 'registration/login.html'
 
 
 
