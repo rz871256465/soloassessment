@@ -9,9 +9,10 @@ class shopping_index(models.Model):
     price = models.FloatField()
     average_review_rating = models.TextField()
     country = models.TextField()
+    img = models.TextField(default='default_value_here')
 
     def __str__(self):
-            return f'{self.uniq_id}, {self.product_name}, {self.manufacturer}, {self.price}, {self.average_review_rating}, {self.country}'
+            return f'{self.uniq_id}, {self.product_name}, {self.manufacturer}, {self.price}, {self.average_review_rating}, {self.country}, {self.img}'
 
 class Shopping_detail(models.Model):
     id = models.IntegerField(primary_key=True)

@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -87,7 +88,7 @@
       <div class="container">
         {% for row in shopping_items %}
         <div class="item">
-          <img src="{{ row.image }}" alt="{{ row.product_name }}" />
+          <img src="{{ row.img }}" alt="{{ row.product_name }}" >
           <p><a href="/product_by_name/{{row.product_name}}" > {{ row.product_name }}</a></p>
           <p>{{ row.manufacturer }}</p>
           <p>{{ row.price }}</p>
@@ -97,7 +98,17 @@
         {% endfor %}
       </div>
     </div>
-
+<div class="container">
+  <h2>当前页页码状态</h2>
+  <p>当前页可以使用 .active 类来高亮显示：</p>
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+  </ul>
+</div>
   </body>
 </html>
 

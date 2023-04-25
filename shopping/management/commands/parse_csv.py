@@ -32,6 +32,7 @@ class Command(BaseCommand):
                     price = float(row[3]),
                     average_review_rating = row[4],
                     country = row[5],
+                    img = row[6],
                 )
                 shopping.save()
 
