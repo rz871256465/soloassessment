@@ -8,6 +8,7 @@ from .forms import RegistrationForm
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
+from django.core.paginator import Paginator
 # Create your views here.
 def index(request):
     return render(request, 'shopping/index.html')
@@ -19,7 +20,10 @@ def shoppingindex(request):
         Q(manufacturer__icontains=query) |
         Q(country__icontains=query)
     )
-    return render(request, 'shopping/shopping_index.html', {'shopping_items':shopping_items,'query':query})
+    paginator = Paginator(shopping_items, 6)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'shopping/shopping_index.html', {'page_obj': page_obj,'query':query})
 
 def shoppingdetail(request):
     shopping_details = Shopping_detail.objects.all()
