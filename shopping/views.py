@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import shopping_index, Shopping_detail
+from .models import shopping_index, Shopping_detail, cart
 import plotly.graph_objs as go
 from plotly.offline import plot
 from django.db.models import Q
@@ -89,5 +89,19 @@ def register(request):
 class MyLoginView(LoginView):
     template_name = 'registration/login.html'
 
+def add_to_cart(request):
+    if request.method == 'POST':
+        product_name = request.POST['product_name']
+        price = request.POST['price']
+        cartlist, created = cart.objects.get_or_create(
+            product_name=product_name,
+            price=price,
 
+        )
+        print(product_name,price,cartlist)
+        cartlist = cart.objects.all()
+        return render(request, 'shopping/cart.html', {'cartlist': cartlist})
 
+    else:
+        cartlist = cart.objects.all()
+        return render(request, 'shopping/cart.html', {'cartlist': cartlist})

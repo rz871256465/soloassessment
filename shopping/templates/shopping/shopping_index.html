@@ -62,6 +62,7 @@
     <li class="nav-item">
       <a class="nav-link" href="#">Link 2</a>
     </li>
+    <a href="{% url 'cart' %}">Cart</a>
 
     <!-- Dropdown -->
     <li class="nav-item dropdown">
@@ -94,6 +95,12 @@
           <p>{{ row.price }}</p>
           <p>{{ row.average_review_rating }}</p>
           <p>{{ row.country }}</p>
+          <form method="POST" action="{% url 'cart' %}">
+           {% csrf_token %}
+              <input type="hidden" name="product_name" value="{{ row.product_name }}">
+              <input type="hidden" name="price" value="{{ row.price }}">
+              <button type="submit">加入购物车</button>
+          </form>
         </div>
         {% endfor %}
       </div>

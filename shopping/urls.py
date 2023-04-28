@@ -12,4 +12,6 @@ urlpatterns = [
     path('register/', views.register, name='register'),
     path('login/', MyLoginView.as_view(redirect_authenticated_user=True), name='login'),
     path('logout/', LogoutView.as_view(next_page='/'), name='logout'),
+    path('cart/',views.add_to_cart, name='cart'),
+
 ]
