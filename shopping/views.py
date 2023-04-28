@@ -105,3 +105,13 @@ def add_to_cart(request):
     else:
         cartlist = cart.objects.all()
         return render(request, 'shopping/cart.html', {'cartlist': cartlist,'new_product': {'product_name': product_name, 'price': price}})
+
+def remove_from_cart(request):
+    if request.method == 'POST':
+        product_name = request.POST['product_name']
+        price = request.POST['price']
+        cart.objects.filter(product_name=product_name, price=price).delete()
+        cartlist = cart.objects.all()
+        return render(request, 'shopping/cart.html', {'cartlist': cartlist})
+
+

@@ -20,6 +20,14 @@
         <tr>
           <td>{{ row.product_name }}</td>
           <td>{{ row.price }}</td>
+          <td>
+      <form method="post" action="{% url 'remove_from_cart' %}">
+      {% csrf_token %}
+      <input type="hidden" name="product_name" value="{{ row.product_name }}">
+      <input type="hidden" name="price" value="{{ row.price }}">
+      <button type="submit">Remove from Cart</button>
+      </form>
+          </td>
         </tr>
       {% endfor %}
     </tbody>
