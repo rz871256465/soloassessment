@@ -100,8 +100,8 @@ def add_to_cart(request):
         )
         print(product_name,price,cartlist)
         cartlist = cart.objects.all()
-        return render(request, 'shopping/cart.html', {'cartlist': cartlist})
+        return render(request, 'shopping/cart.html', {'cartlist': cartlist,'new_product': {'product_name': product_name, 'price': price}})
 
     else:
         cartlist = cart.objects.all()
-        return render(request, 'shopping/cart.html', {'cartlist': cartlist})
+        return render(request, 'shopping/cart.html', {'cartlist': cartlist,'new_product': {'product_name': product_name, 'price': price}})

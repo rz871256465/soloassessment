@@ -1,25 +1,29 @@
 
+{% if new_product %}
+  <p>New product added:</p>
+  <ul>
+    <li>Product name: {{ new_product.product_name }}</li>
+    <li>Price: {{ new_product.price }}</li>
+  </ul>
+{% endif %}
 
-{% block content %}
-  <h1>Shopping Cart</h1>
-  {% if cart %}
-    <table>
-      <thead>
+{% if cartlist %}
+  <table>
+    <thead>
+      <tr>
+        <th>Product Name</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in cartlist %}
         <tr>
-          <th>Product Name</th>
-          <th>Price</th>
+          <td>{{ row.product_name }}</td>
+          <td>{{ row.price }}</td>
         </tr>
-      </thead>
-      <tbody>
-        {% for row in cartlist %}
-          <tr>
-            <td>{{ row.product_name }}</td>
-            <td>{{ row.price }}</td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  {% else %}
-    <p>Your shopping cart is currently empty.</p>
-  {% endif %}
-{% endblock %}
+      {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+  <p>Your shopping cart is currently empty.</p>
+{% endif %}
