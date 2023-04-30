@@ -92,26 +92,36 @@ class MyLoginView(LoginView):
 def add_to_cart(request):
     if request.method == 'POST':
         product_name = request.POST['product_name']
-        price = request.POST['price']
-        cartlist, created = cart.objects.get_or_create(
+        price = float(request.POST['price'])
+        quantity = int(request.POST.get('quantity', 1))
+        cart_item, created = cart.objects.get_or_create(
             product_name=product_name,
             price=price,
-
+            defaults={'quantity': quantity },
         )
-        print(product_name,price,cartlist)
-        cartlist = cart.objects.all()
-        return render(request, 'shopping/cart.html', {'cartlist': cartlist,'new_product': {'product_name': product_name, 'price': price}})
-
+        if not created:
+            cart_item.quantity = quantity
+            cart_item.save()
+        cart_list = cart.objects.all()
+        total = sum([item.price * item.quantity for item in cart_list])
+        return render(request, 'shopping/cart.html', {'cart_list': cart_list, 'new_product': {'product_name': product_name, 'price': price}, 'total': total})
     else:
-        cartlist = cart.objects.all()
-        return render(request, 'shopping/cart.html', {'cartlist': cartlist,'new_product': {'product_name': product_name, 'price': price}})
+        cart_list = cart.objects.all()
+        total = sum([item.price * item.quantity for item in cart_list])
+        return render(request, 'shopping/cart.html', {'cart_list': cart_list, 'total': total})
+        print(total)
 
 def remove_from_cart(request):
     if request.method == 'POST':
         product_name = request.POST['product_name']
-        price = request.POST['price']
-        cart.objects.filter(product_name=product_name, price=price).delete()
-        cartlist = cart.objects.all()
-        return render(request, 'shopping/cart.html', {'cartlist': cartlist})
-
-
+        price = float(request.POST['price'])
+        item = cart.objects.get(product_name=product_name, price=price)
+        quantity = item.quantity
+        if quantity > 1:
+            item.quantity -= 1
+            item.save()
+        else:
+            item.delete()
+        cart_list = cart.objects.all()
+        total = sum([item.price * item.quantity for item in cart_list])
+        return render(request, 'shopping/cart.html', {'cart_list': cart_list, 'total': total})

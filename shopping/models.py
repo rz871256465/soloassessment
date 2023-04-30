@@ -33,9 +33,9 @@ class cart(models.Model):
     price = models.FloatField()
     product_name = models.TextField()
     sale_place = models.TextField()
-    add_to_chart = models.BooleanField(default=False)
-
+    add_to_cart = models.BooleanField(default=False)
+    quantity = models.IntegerField(default=False)
     def __str__(self):
-        return f'{self.product_id}, {self.price}, {self.product_name}, {self.sale_place}, {self.add_to_chart}'
+        return f'{self.product_id}, {self.price}, {self.product_name}, {self.sale_place}, {self.add_to_cart}, {self.quantity}'
 
 
