@@ -15,15 +15,38 @@ def index(request):
 @login_required
 def shoppingindex(request):
     query = request.GET.get('query', '')
+    price_min = request.GET.get('price_min', '')
+    price_max = request.GET.get('price_max', '')
+    initial_letter = request.GET.get('initial_letter', '')
+
     shopping_items = shopping_index.objects.filter(
         Q(product_name__icontains=query) |
         Q(manufacturer__icontains=query) |
         Q(country__icontains=query)
     )
+
+    if price_min:
+        shopping_items = shopping_items.filter(price__gte=price_min)
+    if price_max:
+        shopping_items = shopping_items.filter(price__lte=price_max)
+
+        # Add initial letter filter
+    if initial_letter:
+        shopping_items = shopping_items.filter(product_name__istartswith=initial_letter)
+
     paginator = Paginator(shopping_items, 6)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    return render(request, 'shopping/shopping_index.html', {'page_obj': page_obj,'query':query})
+
+    context = {
+        'page_obj': page_obj,
+        'query': query,
+        'price_min': price_min,
+        'price_max': price_max,
+        'initial_letter': initial_letter,
+    }
+
+    return render(request, 'shopping/shopping_index.html', context)
 
 def shoppingdetail(request):
     shopping_details = Shopping_detail.objects.all()

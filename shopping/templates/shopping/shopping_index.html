@@ -85,6 +85,22 @@
     <div class="container-wrapper">
       <div class="side-panel">
         <p>Right Panel</p>
+        <!-- Price filter -->
+<form method="get" class="filter-form">
+  <label for="price_min">Price Min:</label>
+  <input type="number" name="price_min" value="{{ price_min }}">
+  <label for="price_max">Price Max:</label>
+  <input type="number" name="price_max" value="{{ price_max }}">
+  <button type="submit">Filter</button>
+</form>
+
+<!-- Initial letter filter -->
+<form method="get" class="filter-form">
+  <label for="initial_letter">Initial Letter:</label>
+  <input type="text" name="initial_letter" maxlength="1" value="{{ initial_letter | upper }}">
+  <button type="submit">Filter</button>
+</form>
+
       </div>
       <div class="container">
         {% for row in page_obj %}
