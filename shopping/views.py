@@ -9,6 +9,8 @@ from .forms import RegistrationForm
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
+from django.contrib.auth.decorators import user_passes_test
+from django.contrib.admin.views.decorators import staff_member_required
 # Create your views here.
 def index(request):
     try:
@@ -60,6 +62,8 @@ def shoppingdetail(request):
     except:
         raise Http404("Shopping detail not found")
 
+@user_passes_test(lambda u: u.is_superuser, login_url='/admin/login/')
+@staff_member_required
 def product_by_name(request, value):
     try:
         produce_noorder = Shopping_detail.objects.filter(product_name=value)
