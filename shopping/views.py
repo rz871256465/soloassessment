@@ -132,19 +132,14 @@ def add_to_cart(request):
         cart_list = cart.objects.all()
         total = sum([item.price * item.quantity for item in cart_list])
         return render(request, 'shopping/cart.html', {'cart_list': cart_list, 'total': total})
-        print(total)
 
 def remove_from_cart(request):
     if request.method == 'POST':
         product_name = request.POST['product_name']
         price = float(request.POST['price'])
-        item = cart.objects.get(product_name=product_name, price=price)
-        quantity = item.quantity
-        if quantity > 1:
-            item.quantity -= 1
-            item.save()
-        else:
-            item.delete()
-        cart_list = cart.objects.all()
-        total = sum([item.price * item.quantity for item in cart_list])
-        return render(request, 'shopping/cart.html', {'cart_list': cart_list, 'total': total})
+        cart_item = cart.objects.get(product_name=product_name, price=price)
+        cart_item.delete()
+    cart_list = cart.objects.all()
+    total = sum([item.price * item.quantity for item in cart_list])
+    return render(request, 'shopping/cart.html', {'cart_list': cart_list, 'total': total})
+

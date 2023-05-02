@@ -1,12 +1,4 @@
 
-{% if new_product %}
-  <p>New product added:</p>
-  <ul>
-    <li>Product name: {{ new_product.product_name }}</li>
-    <li>Price: {{ new_product.price }}</li>
-  </ul>
-{% endif %}
-
 {% if cart_list %}
   <table>
     <thead>
@@ -14,6 +6,7 @@
         <th>Product Name</th>
         <th>Price</th>
         <th>Quantity</th>
+        <th>Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -22,12 +15,21 @@
           <td>{{ row.product_name }}</td>
           <td>{{ row.price }}</td>
           <td>
+            <form method="post" action="{% url 'add_to_cart' %}">
+              {% csrf_token %}
+              <input type="hidden" name="product_name" value="{{ row.product_name }}">
+              <input type="hidden" name="price" value="{{ row.price }}">
+              <input type="hidden" name="original_quantity" value="{{ row.quantity }}">
+              <input type="number" name="quantity" value="{{ row.quantity }}" min="1" max="99">
+              <button type="submit">Update Cart</button>
+            </form>
+          </td>
+          <td>
             <form method="post" action="{% url 'remove_from_cart' %}">
               {% csrf_token %}
               <input type="hidden" name="product_name" value="{{ row.product_name }}">
               <input type="hidden" name="price" value="{{ row.price }}">
-              <input type="number" name="quantity" value="{{ row.quantity }}" min="1" max="99">
-              <button type="submit">Remove from Cart</button>
+              <button type="submit">Remove</button>
             </form>
           </td>
         </tr>
