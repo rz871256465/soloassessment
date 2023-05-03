@@ -1,12 +1,26 @@
-<!-- registration/register.html -->
 
+{% load static %}
+<div style="height: 100vh; display: flex; justify-content: center; align-items: center;">
+  <div class="border rounded p-5" style="background-color: rgba(232, 232, 232, 0.8); max-width: 500px; border-radius: 5px; border: 1px solid #fff; padding-left: 20px; padding-right: 20px; overflow: auto;">
+    <div style="color: black; font-family: Times New Roman;">
+      <h1>Toys</h1>
+    </div>
+    <h2 class="text-center mb-4" style="padding-top: 20px;">Register</h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn btn-primary btn-block mt-4" style="margin-bottom: 20px;">Register</button>
+    </form>
+  </div>
+</div>
 
-
-{% block content %}
-  <h2>Register</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Register</button>
-  </form>
-{% endblock %}
+<style>
+  body {
+    background-image: url("{% static 'images/toysbackground.jpg' %}");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-attachment:fixed;
+    margin: 0;
+    padding: 0;
+  }
+</style>

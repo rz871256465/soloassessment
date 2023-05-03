@@ -1,6 +1,10 @@
-
-
-{% block content %}
+{% load static %}
+<div style="display: flex; height: 100vh;">
+  <div style="background-color: rgba(232, 232, 232, 0.7); border: 1px solid white; padding: 20px; border-radius: 20px; margin: auto;">
+      <div style="color: black; font-family: Times New Roman;">
+    <h1>Toys</h1>
+  </div>
+    {% block content %}
     <h2>Login</h2>
     <form method="post">
         {% csrf_token %}
@@ -9,4 +13,28 @@
     </form>
     <br>
     <a href="{% url 'register' %}">Register</a>
-{% endblock %}
+    {% endblock %}
+  </div>
+</div>
+
+<style>
+body {
+      background-image: url("{% static 'images/toysbackground.jpg' %}");
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+      background-attachment:fixed;
+    }
+    .border {
+        border: 1px solid #fff;
+    }
+    .border-rounded {
+        border-radius: 5px;
+    }
+    .bg-gray {
+        background-color: #E8E8E8;
+    }
+    .padding-20 {
+        padding: 20px;
+    }
+</style>
+
