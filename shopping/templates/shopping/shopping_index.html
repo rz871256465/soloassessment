@@ -141,8 +141,8 @@
         {% endfor %}
       </div>
     </div>
-<div class="container">
-  <ul class="pagination">
+<div  style="display:flex; justify-content:center; margin-top: 20px; ">
+  <ul class="pagination" >
     {% if page_obj.has_previous %}
       <li class="page-item"><a class="page-link" href="?page=1{% if query %}&query={{ query }}{% endif %}">&laquo;</a></li>
       <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if query %}&query={{ query }}{% endif %}">&lt;</a></li>
