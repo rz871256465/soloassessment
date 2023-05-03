@@ -1,6 +1,50 @@
 
 {% if cart_list %}
-  <table>
+
+ <head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <style>
+    th, td {
+			padding: 8px;
+			text-align: center;
+		}
+		th {
+			background-color: #ddd;
+		}
+		tr:nth-child(even){background-color: #f2f2f2}
+
+    </style>
+  </head>
+
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <!-- Brand -->
+  <a class="navbar-brand" href="#">Toys</a>
+
+  <!-- Links -->
+  <ul class="navbar-nav mr-auto">
+    <li class="nav-item">
+      <a class="nav-link" href="/shoppingindex">Home</a>
+    </li>
+  </ul>
+
+
+
+  <form method="GET" action="{% url 'shoppingindex' %}">
+    <input type="text" name="query" placeholder="Search..." value="{{ query }}">
+    <button type="submit">Go</button>
+  </form>
+
+</nav>
+
+    <div style="text-align: center;">
+  <table style="margin: auto;">
     <thead>
       <tr>
         <th>Product Name</th>
@@ -36,7 +80,10 @@
       {% endfor %}
     </tbody>
   </table>
-  <p>Total: {{ total }}</p>
+      </div>
+ <div style="text-align: center;"><p>Total: {{ total }}</p></div>
+
 {% else %}
   <p>Your shopping cart is currently empty.</p>
 {% endif %}
+
