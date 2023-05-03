@@ -8,9 +8,9 @@ class ShopModelTests(TestCase):
     def setUpTestData(cls):
         # set up test data in database
         shopping_index.objects.create(uniq_id='eac7efa5dbd3d667f26eb3d3ab504464', product_name='Hornby 2014 Catalogue', manufacturer='Hornby', price=7.42,
-                                      average_review_rating='4.9 out of 5 stars', country='Denmark', img='https://unsplash.com/photos/qBrF1yu5Wys')
+                                      average_review_rating='4.9 out of 5 stars', country='Denmark', img='https://farm2.staticflickr.com/3130/3199437105_1e0d8c305a_o.jpg')
         shopping_index.objects.create(uniq_id='e12b92dbb8eaee78b22965d2a9bbbd9f',product_name='HORNBY Coach R4410A BR Hawksworth Corridor 3rd',manufacturer='Hornby', price=39.99,
-                                      average_review_rating='5.0 out of 5 stars', country='China',img='https://volcano.si.edu/gallery/photos/GVP-02810.jpg')
+                                      average_review_rating='5.0 out of 5 stars', country='China',img='https://farm2.staticflickr.com/3130/3199437105_1e0d8c305a_o.jpg')
         Shopping_detail.objects.create(id=1, date='2022/1/11', uniq_id='eac7efa5dbd3d667f26eb3d3ab504464',
                                        product_name=shopping_index.objects.get(uniq_id='eac7efa5dbd3d667f26eb3d3ab504464'), manufacturer='Hornby',
                                        price=7.42, average_review_rating='4.9 out of 5 stars', city='Aarhus', country='Denmark',
