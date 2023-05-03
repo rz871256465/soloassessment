@@ -15,12 +15,43 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <title>Country List</title>
     <style>
+        th, td {
+			padding: 8px;
+			text-align: center;
+		}
+		th {
+			background-color: #ddd;
+		}
+		tr:nth-child(even){background-color: #f2f2f2}
+
+
+
     </style>
     <title>Country List</title>
 </head>
 <body>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <!-- Brand -->
+  <a class="navbar-brand" href="/">Toys</a>
 
-    <div class="table-container">
+  <!-- Links -->
+  <ul class="navbar-nav mr-auto">
+    <li class="nav-item">
+      <a class="nav-link" href="/shoppingindex">Home</a>
+    </li>
+  </ul>
+
+
+
+  <form method="GET" action="{% url 'shoppingindex' %}">
+    <input type="text" name="query" placeholder="Search..." value="{{ query }}">
+    <button type="submit">Go</button>
+  </form>
+
+</nav>
+
+    <div class="table-container" >
+        <h5 style="padding-top: 10px;padding-bottom: 10px; color: grey; ">Product origin:</h5>
     <div>
     <div id="mapid"></div>
  <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from
