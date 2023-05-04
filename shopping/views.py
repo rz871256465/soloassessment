@@ -31,7 +31,7 @@ def shoppingindex(request):
             Q(product_name__icontains=query) |
             Q(manufacturer__icontains=query) |
             Q(country__icontains=query)
-        )
+        ).order_by('product_name')
 
         if price_min:
             shopping_items = shopping_items.filter(price__gte=price_min)
