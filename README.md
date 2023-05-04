@@ -5,7 +5,20 @@
 This application is a toy shopping site with a hierarchy of permissions. Users need to register to access the site to make purchases. Regular users can click on Add to Cart to complete their shopping. The app has a general search and an advanced search function to filter items.If the user wants to view the details of the product, they need to click on the item hyperlink to jump to the detail page. The details page contains information on the origin of the product and a graph of the price movements of the product, as well as information on the different products sold on that day. Of course, the details page requires admin rights to view.
 
 
+#### Render URL: https://soloassessment3.onrender.com
+
+
+#### superuser account: huang871256465
+#### superuser password: zr981400
+
+
+#### login account: qwe123456
+#### login passward: qwe456789
+
+
+Here are some samples for you to use. If you are willing, you can also register on the website and register as a superuser in this app.
     
+
 
 ## ** matters needing attention：**
 
@@ -25,10 +38,18 @@ cd into the folder via the terminal and execute these commands:
     source .venv/bin/activate # this activates the virtual environment
     pip install --upgrade pip [ this is optional]  # this installs pip, and upgrades it if required.
    
+we also need install Django:
+
+    pip install django
+
 we also need install plotly:
 
     pip install plotly
     
+we also need install whitenoise:
+
+    pip install whitenoise
+
 
 # Step 2: we need data migration：
 
