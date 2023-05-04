@@ -19,7 +19,7 @@ def index(request):
         return render(request, 'shopping/index.html')
     except:
         raise Http404("Index not found")
-@login_required
+
 def shoppingindex(request):
     try:
         query = request.GET.get('query', '')
@@ -163,7 +163,7 @@ def logout_view(request):
     logout(request)
     return redirect(request.META.get('HTTP_REFERER', reverse('index')))
 
-
+@login_required
 def add_to_cart(request):
     try:
         if request.method == 'POST':
@@ -188,7 +188,7 @@ def add_to_cart(request):
     except Exception as e:
         # Handle any exception that might occur
         return render(request, 'shopping/error.html', {'error': str(e)})
-
+@login_required
 def remove_from_cart(request):
     try:
         if request.method == 'POST':
