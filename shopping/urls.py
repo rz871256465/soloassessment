@@ -1,11 +1,5 @@
 from django.urls import path
-
 from . import views
-
-
-
-handler404 = 'shopping.views.error'
-
 
 urlpatterns = [
     path('', views.index, name='index'),
