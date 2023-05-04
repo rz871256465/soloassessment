@@ -18,6 +18,8 @@ This application is a toy shopping site with a hierarchy of permissions. Users n
 
 Here are some samples for you to use. If you are willing, you can also register on the website and register as a superuser in this app.
     
+This app is divided into three levels of permissions. The first is the tourist mode, where tourists can enter the website and view products. The second is the user mode. Click the shopping cart to jump to the login interface. You can choose to use the user account password above or create your own account. The third mode is administrator backend permission, which can be accessed by clicking on the product's hyperlink. You can also enter the administrator account and password, view maps, charts, and various data information.
+
 
 
 ## ** matters needing attention：**
@@ -27,7 +29,7 @@ As this application has hierarchical permissions, we need to create a super user
 
     python3 manage.py createsuperuser
         
-            
+
 
 # Step 1: Install the environment
 
